@@ -1,0 +1,80 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.6">
+    <link rel="icon" type="image/jpg" href="{% static 'img/favicon.jpg' %}">
+    <title>{{title}}</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/navbar-fixed/">
+
+    <!-- Bootstrap core CSS -->
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'js/nprogress/nprogress.css' %}" rel="stylesheet">
+<link href="{% static 'css/stylesheet.css' %}" rel="stylesheet">
+
+
+
+    <style>
+      .mybutton {
+        background-color: #800080 !important;
+        border-color: #800080;
+        width: 50%;
+        
+      }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/navbar-top-fixed.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    {% include 'navbar.html' %} 
+
+<main role="main" class="container">
+  <div class="jumbotron">
+    <div class="header">{{title}}</div>
+    <hr>
+      <div class="row"><!--Start of row-->
+        <div class="col-sm-5 mx-auto"><!--Start of col-->
+          <div class="display_table">
+                <form action="" method="POST">{% csrf_token %}
+                    {{form|crispy}}
+                    <br>
+                    <div class="text-center"> 
+                    <input class="btn btn-primary mybutton" type="submit" value="Add">
+
+                    </div>
+                </form>
+          </div>
+        </div><!--End of col-->
+      </div><!--End of row-->
+
+  </div>
+</main>
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui-1.12.1/jquery-ui.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/nprogress/nprogress.js' %}"></script>
+<script src="{% static 'js/myjs.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+{% load static %}
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.6">
+    <link rel="icon" type="image/jpg" href="{% static 'img/favicon.jpg' %}">
+    <title>Home</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/navbar-fixed/">
+
+    <!-- Bootstrap core CSS -->
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'js/nprogress/nprogress.css' %}" rel="stylesheet">
+
+<!-- CSS for alertify -->
+<link rel="stylesheet" href="{% static 'js/alertify/css/alertify.min.css' %}"/>
+<link rel="stylesheet" href="{% static 'js/alertify/css/themes/bootstrap.min.css' %}"/>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+<link href="{% static 'css/stylesheet.css' %}" rel="stylesheet">
+
+
+
+    <style>
+      /* homepage cards */
+      .myheader{
+          background: #800080;
+      }
+      .my-card:hover{
+        transform: scale(1.1);
+        transition: 0.2s ease-in-out;
+      }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/navbar-top-fixed.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    {% include 'navbar.html' %} 
+
+<main role="main" class="container">
+  <div class="jumbotron">
+        <!--Topside-->
+        <div class="container">
+          <div class="row mt-3">
+              <div class="col-md-4">
+                  <div class="card">
+                      <div class="card-header myheader text-white">
+                          Information
+                      </div>
+                      <div class="card-body">
+                          <marquee behavior="" direction="">
+                              <h3 class="my-4">Stock Management App created by Gopikrishnan </h3>
+                          </marquee>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-8">
+                  <div class="card">
+                      <div class="card-header myheader text-white">
+                          Functions
+                      </div>
+                      <div class="card-body">
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <a class="text-decoration-none text-dark" href="/add_items">
+                                      <div class="card my-card shadow text-center p-4">
+                                          <h4><i class="fas fa-plus-circle"></i> <br> Add Items </h4>
+                                      </div>
+                                  </a>
+                              </div>
+                              <div class="col-md-4">
+                                  <a class="text-decoration-none text-dark" href="/list_items">
+                                      <div class="card my-card shadow text-center p-4">
+                                          <h4><i class="fas fa-clipboard-list"></i> <br> Item List </h4>
+                                      </div>
+                                  </a>
+                              </div>
+                              <div class="col-md-4">
+                                  <a class="text-decoration-none text-dark" href="/list_history">
+                                      <div class="card my-card shadow text-center p-4">
+                                          <h4><i class="fas fa-history"></i> <br> History </h4>
+                                      </div>
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      <!--End Topside-->
+  
+      <!--Graphs-->
+    <div class="container">
+      <div class="row my-5">
+          <div class="col-md-6">
+              <div class="bg-white">
+                  <canvas id="myChart1" width="400" height="300"></canvas>
+                  <script>
+                      var ctx = document.getElementById('myChart1').getContext('2d');
+                      var myChart1 = new Chart(ctx, {
+                          type: 'doughnut',
+                          data: {
+                              labels: [{% for cat in categ %} '{{ cat.title }}' ,{% endfor %}],
+                              datasets: [{
+                                  label: 'Number of Items per category ',
+                                  data: [{% for cat in categ %} {{ cat.count }} ,{% endfor %}],
+                                  backgroundColor: [
+                                      'rgba(255, 99, 132, 0.5)',
+                                      'rgba(54, 162, 235, 0.5)',
+                                      'rgba(255, 206, 86, 0.5)',
+                                      'rgba(75, 192, 192, 0.5)',
+                                      'rgba(153, 102, 255, 0.5)',
+                                      'rgba(255, 159, 64, 0.5)'
+                                  ],
+                                  borderColor: [
+                                      'rgba(255, 99, 132, 1)',
+                                      'rgba(54, 162, 235, 1)',
+                                      'rgba(255, 206, 86, 1)',
+                                      'rgba(75, 192, 192, 1)',
+                                      'rgba(153, 102, 255, 1)',
+                                      'rgba(255, 159, 64, 1)'
+                                  ],
+                                  borderWidth: 1
+                              }]
+                          },
+                          options: {
+                              scales: {
+                                  yAxes: [{
+                                      ticks: {
+                                          beginAtZero: true
+                                      }
+                                  }]
+                              }
+                          }
+                      });
+                  </script>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="bg-white">
+                  <canvas id="myChart" width="400" height="300"></canvas>
+                  <script>
+                      var ctx = document.getElementById('myChart').getContext('2d');
+                      var myChart = new Chart(ctx, {
+                          type: 'bar',
+                          data: {
+                              labels: [{% for cat in categ2 %} '{{ cat.title }}' ,{% endfor %}],
+                              datasets: [{
+                                  label: 'Products per categories',
+                                  data: [{% for cat in categ2 %} {{ cat.count }} ,{% endfor %}],
+                                  backgroundColor: [
+                                      'rgba(255, 99, 132, 0.5)',
+                                      'rgba(54, 162, 235, 0.5)',
+                                      'rgba(255, 206, 86, 0.5)',
+                                      'rgba(75, 192, 192, 0.5)',
+                                      'rgba(153, 102, 255, 0.5)',
+                                      'rgba(255, 159, 64, 0.5)'
+                                  ],
+                                  borderColor: [
+                                      'rgba(255, 99, 132, 1)',
+                                      'rgba(54, 162, 235, 1)',
+                                      'rgba(255, 206, 86, 1)',
+                                      'rgba(75, 192, 192, 1)',
+                                      'rgba(153, 102, 255, 1)',
+                                      'rgba(255, 159, 64, 1)'
+                                  ],
+                                  borderWidth: 1
+                              }]
+                          },
+                          options: {
+                              scales: {
+                                  yAxes: [{
+                                      ticks: {
+                                          beginAtZero: true
+                                      }
+                                  }]
+                              }
+                          }
+                      });
+                  </script>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!--End Graphs-->
+  
+  </div>
+</main>
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui-1.12.1/jquery-ui.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/alertify/alertify.min.js' %}"></script>
+<script>
+  {% for message in messages %}
+      alertify.set('notifier','position', 'top-center');
+      alertify.success('{{message}}');
+  {% endfor %}
+</script>
+<script src="{% static 'js/nprogress/nprogress.js' %}"></script>
+<script src="{% static 'js/myjs.js' %}"></script>
+</body>
+</html>

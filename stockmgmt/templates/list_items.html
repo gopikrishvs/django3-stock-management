@@ -1,0 +1,139 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.6">
+    <link rel="icon" type="image/jpg" href="{% static 'img/favicon.jpg' %}">
+    <title>{{title}}</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/navbar-fixed/">
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'js/nprogress/nprogress.css' %}" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'js/alertify/css/alertify.min.css' %}"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="{% static 'js/alertify/css/themes/semantic.min.css' %}"/>
+    <link href="{% static 'css/stylesheet.css' %}" rel="stylesheet">
+
+
+    <style>
+      .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+        background-color: #800080 !important;
+        border-color: #800080;
+      }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .mybutton{
+        width: 100%;
+      }
+      /* a:link, a:visited {
+      color: #b40aca;
+      }
+      a:hover, a:active {
+        color:#966196
+      } */
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/navbar-top-fixed.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    {% include 'navbar.html' %} 
+    
+<main role="main" class="container">
+
+<div class="jumbotron">
+    <div class="header">{{header}}</div>
+    <hr>
+
+    <div class="row"><!--Start of row-->
+      <div class="col-sm-2"><!--Start of first col-->
+
+          <form method='POST' action=''>{% csrf_token %}
+              {{form|crispy}}
+              <input class="btn btn-primary mybutton" type="submit" value='Search'/>
+          </form>
+          <br><br><br>
+          <a href="/add_items"><div class="btn btn-primary mybutton">Add Items</div></a><br><br>
+          <a href="/list_history"><div class="btn btn-primary mybutton">History</div></a><br>
+          <br>
+      </div><!--End of fist col-->
+      <div class="col-sm-10"><!--Start of second col-->
+          <div class="display_table">
+              <table class='table'>
+                  <thead>
+                  <tr>
+                      <th></th>
+                      <th>CATEGORY</th>
+                      <th>ITEM</th>
+                      <th>QUANTITY</th>
+                      <th>REORDER LEVEL</th>
+                      <!-- <th>TIMESTAMP</th> -->
+                      <th>LAST UPDATED</th>
+                      <th>DELETE</th>
+                  </tr>
+                  </thead>
+              {% for query in queryset %}
+                  <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{query.category}}</td>
+                      <td><a href="{% url 'update_items' query.id %}">{{query.item_name}}</a></td>
+                      <td>
+                        {% if query.quantity <= query.reorder_level %}
+                          <div style="background-color: #;">
+                            <a href="{% url 'stock_detail' query.id %}"><span style="color:#f00;">{{query.quantity}} !!</span></a>
+                          </div>
+                        {% else %}
+                            <a href="{% url 'stock_detail' query.id %}">{{query.quantity}}</a>
+                        {% endif %}
+                      </td>
+                      <td><a href="{% url 'reorder_level' query.id %}">{{query.reorder_level}}</a></td>
+                      <!-- <td>{{query.timestamp}}</td> -->
+                      <td>{{query.last_updated}}</td>
+                      <td><a href="{% url 'delete_items' query.id %}"><img src='{% static "img/del.png" %}'></a></td>
+                  </tr>
+              {% endfor %}
+              </table>
+          </div><!--End of display-table-->
+
+      </div><!--End of second col-->
+    </div><!--End of row-->
+</div>
+</main>
+</body>
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui-1.12.1/jquery-ui.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/alertify/alertify.min.js' %}"></script>
+
+<script>
+  {% for message in messages %}
+      alertify.set('notifier','position', 'top-center');
+      alertify.success('{{message}}');
+  {% endfor %}
+</script>
+<script src="{% static 'js/pager/paging.js' %}"></script>
+<script src="{% static 'js/nprogress/nprogress.js' %}"></script>
+<script src="{% static 'js/myjs.js' %}"></script>
+
+</html>

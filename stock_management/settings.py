@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'ico37a^ca!(zl+f6(s(0jgd9ug4*05*3-#xdscsvz)n&yeh0ge'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gopi-stock-mgmt.herokuapp.com', '127.0.0.1']
 
 
 # Application definition

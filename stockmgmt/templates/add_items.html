@@ -81,6 +81,16 @@
 <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'js/jquery-ui-1.12.1/jquery-ui.js' %}"></script>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/alertify/alertify.min.js' %}"></script>
+
+<script>
+  {% for message in messages %}
+      alertify.set('notifier','position', 'top-center');
+      alertify.success('{{message}}');
+  {% endfor %}
+</script>
+<script src="{% static 'js/pager/paging.js' %}"></script>
+
 <script src="{% static 'js/nprogress/nprogress.js' %}"></script>
 <script src="{% static 'js/myjs.js' %}"></script>
 </body>

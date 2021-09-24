@@ -1,0 +1,76 @@
+body{
+    /* background-color: #fdfdfd; */
+    background-image: url("../img/bg2.jfif");
+}
+/*Align the title to the center of the page*/
+.table {
+	font-size: 14px;
+	text-align: center;
+	width: 95%;
+	margin: auto;
+}
+/* Change bootstrap btn color */
+/* .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #800080 !important;
+} */
+
+/*Make alternating colors for the table rows*/
+.table tr:nth-child(odd) {
+	background: #B8CAE4
+}
+
+.table tr:nth-child(even) {
+	background: #dae5f4
+}
+
+th {
+  background-color: #800080;
+  color: white;
+}
+
+/* Add and Delete item popups*/
+.messages{
+  list-style: none;
+  background-color: #800080;
+  color: white;
+  text-align: center;
+}
+
+
+
+.header {
+    font-family: helvetica;
+    color: #3b3b3b;
+    font-size: 50px;
+    text-align: center;
+    width: 100%;
+    text-shadow: 6px 6px 6px #c9c6c6;
+    display: block;
+    font-weight: bolder;
+}
+
+/*Table paination styling*/
+.paging-nav {
+  text-align: right;
+  padding-top: 6px;
+  padding-right: 21px;
+  font-size: 20px;
+  padding-bottom: 10px;
+
+}
+
+.paging-nav a {
+  margin: auto 1px;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1px 8px;
+  background: #800080;
+  color: white;
+}
+
+.paging-nav .selected-page {
+  font-weight: bold;
+  color: #B8CAE4;
+}
+/* End Table paination styling*/
+
